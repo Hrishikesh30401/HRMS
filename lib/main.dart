@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('HRMS'),
         ),
-        body: Text('HRMS app body'),
+        body: Text('HRMS apps body'),
       ),
     );
   }
