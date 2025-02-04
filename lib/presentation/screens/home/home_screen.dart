@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       create: (context) => HomeBloc(getEmployeeUseCase)..add(HomeLoadEvent()),
       child: Scaffold(
           appBar: AppBar(
-            title: Text('HRMS'),
+            title: Text('HRMS App '),
           ),
           body: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
