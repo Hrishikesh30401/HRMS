@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hrms/presentation/screens/profile_screen/UI/profile_screen.dart';
 import 'package:hrms/presentation/screens/home_screen/bloc/home_bloc.dart';
+import 'package:imagebutton/imagebutton.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,9 +18,25 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Container(
                   padding: EdgeInsets.only(right: 10),
-                  child: Image(
+                  child: ImageButton(
                     width: 50,
-                    image: AssetImage('assets/images/avatar.png'),
+                    height: 45,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (ctx) => ProfileScreen(),
+                        ),
+                      );
+                    },
+                    pressedImage: Image(
+                      width: 50,
+                      image: AssetImage('assets/images/avatar.png'),
+                    ),
+                    unpressedImage: Image(
+                      width: 50,
+                      image: AssetImage('assets/images/avatar.png'),
+                    ),
                   ),
                 ),
                 Text('Home'),
@@ -85,6 +103,51 @@ class HomeScreen extends StatelessWidget {
           }
           return SizedBox();
         },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_rounded,
+              size: 40,
+              color: Colors.blue,
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.widgets_rounded,
+              size: 40,
+              color: Colors.grey,
+            ),
+            label: 'Services',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.add_circle_rounded,
+              size: 50,
+              color: Colors.black87,
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.check_box,
+              size: 40,
+              color: Colors.grey,
+            ),
+            label: 'Approvals',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.settings_rounded,
+              size: 40,
+              color: Colors.grey,
+            ),
+            label: 'Settings',
+          ),
+        ],
       ),
     );
   }
