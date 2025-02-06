@@ -10,7 +10,32 @@ class HomeScreen extends StatelessWidget {
     context.read<HomeBloc>().add(FirebaseGetEmployeesEvent());
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Row(
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Image(
+                    width: 50,
+                    image: AssetImage('assets/images/avatar.png'),
+                  ),
+                ),
+                Text('Home'),
+              ],
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.notifications_none_outlined),
+          ),
+        ],
       ),
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
@@ -30,23 +55,25 @@ class HomeScreen extends StatelessWidget {
               itemCount: state.employees.length,
               itemBuilder: (context, index) {
                 final employee = employees[index];
-                return ListTile(
-                  title: Row(
-                    children: [
-                      Text(employee.firstname ?? ''),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(employee.lastname ?? '')
-                    ],
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Employee ID: ${employee.id}'),
-                      Text('Email Id: ${employee.email}'),
-                      Text('Age: ${employee.age}'),
-                    ],
+                return Card(
+                  child: ListTile(
+                    title: Row(
+                      children: [
+                        Text(employee.firstname ?? ''),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(employee.lastname ?? '')
+                      ],
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Employee ID: ${employee.id}'),
+                        Text('Email Id: ${employee.email}'),
+                        Text('Age: ${employee.age}'),
+                      ],
+                    ),
                   ),
                 );
               },
