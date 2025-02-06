@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:hrms/core/di/injection.dart';
-import 'package:hrms/domain/usecases/get_employees_usecase.dart';
-import 'package:hrms/presentation/screens/home/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hrms/injections.dart';
+import 'package:hrms/presentation/screens/home_screen/UI/home_screen.dart';
+import 'package:hrms/presentation/screens/home_screen/bloc/home_bloc.dart';
 
-void main() {
-  init();
-
+Future<void> main() async {
+  await init();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  final getEmployeeUseCase = locator<GetEmployeeUseCase>();
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(
-        getEmployeeUseCase: getEmployeeUseCase,
+      home: BlocProvider(
+        create: (context) => locator<HomeBloc>(),
+        child: HomeScreen(),
       ),
     );
   }

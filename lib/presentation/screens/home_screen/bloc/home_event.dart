@@ -7,4 +7,4 @@ sealed class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeLoadEvent extends HomeEvent{}
+final class FirebaseGetEmployeesEvent extends HomeEvent {}

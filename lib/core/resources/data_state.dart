@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 
 abstract class DataState<T> {
   final T? data;
-  final FlutterError? error;
+  final DioException? error;
 
   const DataState({this.data, this.error});
 }
@@ -12,5 +12,5 @@ class DataSuccess<T> extends DataState<T> {
 }
 
 class DataFailed<T> extends DataState<T> {
-  const DataFailed(FlutterError error) : super(error: error);
+  const DataFailed(DioException error) : super(error: error);
 }
