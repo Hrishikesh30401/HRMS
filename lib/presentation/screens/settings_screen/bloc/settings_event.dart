@@ -6,3 +6,9 @@ sealed class SettingsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+final class LoadSettingsEvent extends SettingsEvent {}
+
+final class ToggleDarkModeEvent extends SettingsEvent {}
+
+final class LogoutEvent extends SettingsEvent {}
