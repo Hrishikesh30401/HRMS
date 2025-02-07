@@ -18,7 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       FirebaseGetEmployeesEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoading());
     try {
-      final result = await _getEmployeesUsecase();
+      final result = await _getEmployeesUsecase.call();
 
       if (result is DataSuccess<List<EmployeeEntity>>) {
         emit(FirebaseEmployeesLoaded(result.data!));
