@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hrms/core/resources/data_state.dart';
 import 'package:hrms/domain/entities/employee_entity.dart';
 import 'package:hrms/domain/usecases/get_employees_usecase.dart';
 
@@ -20,10 +20,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       final result = await _getEmployeesUsecase.call();
 
-      if (result is DataSuccess<List<EmployeeEntity>>) {
-        emit(FirebaseEmployeesLoaded(result.data!));
-      } else if (result is DataFailed<List<EmployeeEntity>>) {
-        emit(HomeFailure(result.error?.message ?? 'Unknown Error'));
+      if (result is Left) {
+        final failure = (result as Left).value;
+        emit(HomeFailure(failure.message));
+      } else if (result is Right) {
+        final employees = (result as Right).value;
+        emit(FirebaseEmployeesLoaded(employees));
       }
     } catch (e) {
       emit(HomeFailure(e.toString()));

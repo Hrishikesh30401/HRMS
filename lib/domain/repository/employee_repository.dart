@@ -1,6 +1,7 @@
-import 'package:hrms/core/resources/data_state.dart';
+import 'package:dartz/dartz.dart';
+import 'package:hrms/core/resources/failures.dart';
 import 'package:hrms/domain/entities/employee_entity.dart';
 
 abstract class EmployeeRepository {
-  Future<DataState<List<EmployeeEntity>>> getEmployeeDetails();
+  Future<Either<Failure, List<EmployeeEntity>>> getEmployeeDetails();
 }

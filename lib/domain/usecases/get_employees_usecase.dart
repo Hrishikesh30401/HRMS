@@ -1,4 +1,6 @@
-import 'package:hrms/core/resources/data_state.dart';
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:hrms/core/resources/failures.dart';
 import 'package:hrms/domain/entities/employee_entity.dart';
 import 'package:hrms/domain/repository/employee_repository.dart';
 
@@ -7,7 +9,14 @@ class GetEmployeesUsecase {
 
   GetEmployeesUsecase(this.repository);
 
-  Future<DataState<List<EmployeeEntity>>> call() {
-    return repository.getEmployeeDetails();
+  Future<Either<Failure, List<EmployeeEntity>>> call() async {
+    try {
+      final result = await repository.getEmployeeDetails();
+      return result;
+    } on DioException catch (e) {
+      return Left(ServerFailure(e.message ?? 'Server error'));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
   }
 }
